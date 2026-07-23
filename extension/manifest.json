@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "WhatsApp Sender Helper",
+  "version": "1.0.0",
+  "description": "تجهيز الصور داخل WhatsApp Web من نظام WhatsApp Sender",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*",
+    "https://web-whatsapp-alpha.vercel.app/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web-whatsapp-alpha.vercel.app/*"
+      ],
+      "js": [
+        "bridge.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "whatsapp.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "WhatsApp Sender Helper",
+    "default_popup": "popup.html"
+  }
+}
